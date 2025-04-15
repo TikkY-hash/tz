@@ -1,11 +1,12 @@
-import { Snackbar, Alert } from "@mui/material";
-import { useEffect, useState } from "react";
-import { AlertService } from "../AlertService";
+import { Alert, Snackbar } from '@mui/material';
+import { useEffect, useState } from 'react';
+
+import { AlertService } from '../AlertService';
 
 export const GlobalSnackbar = () => {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<"success" | "error">("success");
+  const [message, setMessage] = useState('');
+  const [severity, setSeverity] = useState<'success' | 'error'>('success');
 
   useEffect(() => {
     AlertService.register((msg, sev) => {
@@ -22,9 +23,9 @@ export const GlobalSnackbar = () => {
       open={open}
       autoHideDuration={1000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
     >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
+      <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>

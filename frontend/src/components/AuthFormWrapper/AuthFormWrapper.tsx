@@ -1,5 +1,5 @@
-import { Paper, Tabs, Tab } from "@mui/material";
-import { ReactNode } from "react";
+import { Paper, Tab, Tabs } from '@mui/material';
+import { ReactNode } from 'react';
 
 interface AuthFormWrapperProps {
   tab: number;
@@ -8,12 +8,7 @@ interface AuthFormWrapperProps {
   onTabChange?: () => void;
 }
 
-export const AuthFormWrapper = ({
-  tab,
-  setTab,
-  children,
-  onTabChange,
-}: AuthFormWrapperProps) => {
+export const AuthFormWrapper = ({ tab, setTab, children, onTabChange }: AuthFormWrapperProps) => {
   return (
     <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
       <Tabs

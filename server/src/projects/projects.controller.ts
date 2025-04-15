@@ -1,29 +1,29 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Param,
+  Controller,
   Delete,
-  Put,
+  Get,
+  Param,
   ParseIntPipe,
+  Post,
+  Put,
   Query,
 } from '@nestjs/common';
-import { ProjectsService } from './providers/projects.service';
-import { CreateProjectDto } from './dto/create-project.dto';
-import { ActiveUser } from 'src/auth/decorator/active-user.decorator';
 import {
   ApiBearerAuth,
-  ApiTags,
   ApiOperation,
-  ApiResponse,
   ApiParam,
   ApiQuery,
+  ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger';
+import { ActiveUser } from 'src/auth/decorator/active-user.decorator';
 
+import { CreateProjectDto } from './dto/create-project.dto';
 import { GetProjectDto } from './dto/get-project.dto';
-import { ProjectFiltersDto } from './dto/project-filters.dto';
 import { PaginatedProjectsDto } from './dto/paginated-projects.dto';
+import { ProjectFiltersDto } from './dto/project-filters.dto';
+import { ProjectsService } from './providers/projects.service';
 
 @ApiTags('Projects')
 @ApiBearerAuth()
@@ -42,10 +42,7 @@ export class ProjectsController {
     status: 409,
     description: 'Repository already added',
   })
-  public create(
-    @Body() createProjectDto: CreateProjectDto,
-    @ActiveUser('sub') userId: number,
-  ) {
+  public create(@Body() createProjectDto: CreateProjectDto, @ActiveUser('sub') userId: number) {
     return this.projectsService.create(createProjectDto.repositoryPath, userId);
   }
 
@@ -80,10 +77,7 @@ export class ProjectsController {
     description: 'List of projects',
     type: PaginatedProjectsDto,
   })
-  public findAll(
-    @ActiveUser('sub') userId: number,
-    @Query() projectFiltersDto: ProjectFiltersDto,
-  ) {
+  public findAll(@ActiveUser('sub') userId: number, @Query() projectFiltersDto: ProjectFiltersDto) {
     return this.projectsService.findAll(userId, projectFiltersDto);
   }
 
@@ -96,10 +90,7 @@ export class ProjectsController {
     type: GetProjectDto,
   })
   @ApiResponse({ status: 404, description: 'Project not found or not yours' })
-  public findOne(
-    @Param('id', ParseIntPipe) id: number,
-    @ActiveUser('sub') userId: number,
-  ) {
+  public findOne(@Param('id', ParseIntPipe) id: number, @ActiveUser('sub') userId: number) {
     return this.projectsService.findOne(id, userId);
   }
 
@@ -112,10 +103,7 @@ export class ProjectsController {
     type: GetProjectDto,
   })
   @ApiResponse({ status: 404, description: 'Project not found or not yours' })
-  public refresh(
-    @Param('id', ParseIntPipe) id: number,
-    @ActiveUser('sub') userId: number,
-  ) {
+  public refresh(@Param('id', ParseIntPipe) id: number, @ActiveUser('sub') userId: number) {
     return this.projectsService.refresh(id, userId);
   }
 
@@ -130,10 +118,7 @@ export class ProjectsController {
     },
   })
   @ApiResponse({ status: 404, description: 'Project not found or not yours' })
-  public remove(
-    @Param('id', ParseIntPipe) id: number,
-    @ActiveUser('sub') userId: number,
-  ) {
+  public remove(@Param('id', ParseIntPipe) id: number, @ActiveUser('sub') userId: number) {
     return this.projectsService.delete(id, userId);
   }
 }

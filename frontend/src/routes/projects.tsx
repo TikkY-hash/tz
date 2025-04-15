@@ -1,7 +1,8 @@
 // src/routes/projects.tsx
-import { ProjectsPage } from "@/pages";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute("/projects")({
+import { ProjectsPage } from '@/pages';
+
+export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
 });

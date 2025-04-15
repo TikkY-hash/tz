@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { ProjectsModule } from './projects/projects.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import appConfig from './config/app.config';
-import environmentValidation from './config/environment.validation';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import dbConfig from './config/db.config';
-import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { AuthModule } from './auth/auth.module';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
+import appConfig from './config/app.config';
+import dbConfig from './config/db.config';
+import environmentValidation from './config/environment.validation';
+import { ProjectsModule } from './projects/projects.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [

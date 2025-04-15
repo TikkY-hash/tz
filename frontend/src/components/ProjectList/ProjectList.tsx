@@ -1,8 +1,9 @@
-import { ProjectCard } from "@/components/ProjectCard";
-import { ProjectCardSkeleton } from "@/components/ProjectCardSkeleton";
-import { ProjectCardItem } from "../ProjectCardItem";
-import { EmptyState } from "../EmptyState";
-import { Project } from "@/interfaces/project.interface";
+import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectCardSkeleton } from '@/components/ProjectCardSkeleton';
+import { Project } from '@/interfaces/project.interface';
+
+import { EmptyState } from '../EmptyState';
+import { ProjectCardItem } from '../ProjectCardItem';
 
 interface ProjectListProps {
   projects: Project[];
@@ -38,12 +39,12 @@ export const ProjectList = ({
   }
 
   if (projects.length === 0) {
-    return <EmptyState isFiltered={!!(search || order !== "asc")} />;
+    return <EmptyState isFiltered={!!(search || order !== 'asc')} />;
   }
 
   return (
     <>
-      {projects.map((project) => (
+      {projects.map(project => (
         <ProjectCardItem key={project.id}>
           <ProjectCard
             project={project}

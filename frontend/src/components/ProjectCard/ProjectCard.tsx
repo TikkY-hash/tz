@@ -1,8 +1,9 @@
-import { useThrottle } from "@/hooks/useThrottle";
-import { Button, Paper, Stack, Typography } from "@mui/material";
-import { useState } from "react";
-import { DeleteModal } from "@/components/DeleteModal";
-import { Project } from "@/interfaces/project.interface";
+import { Button, Paper, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+
+import { DeleteModal } from '@/components/DeleteModal';
+import { useThrottle } from '@/hooks/useThrottle';
+import { Project } from '@/interfaces/project.interface';
 
 interface ProjectCardProps {
   project: Project;
@@ -37,14 +38,14 @@ export const ProjectCard = ({
         sx={{
           p: 3,
           borderRadius: 3,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          minWidth: "250px",
-          transition: "transform 0.2s ease, box-shadow 0.2s ease",
-          "&:hover": {
-            transform: "translateY(-4px)",
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          minWidth: '250px',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          '&:hover': {
+            transform: 'translateY(-4px)',
             boxShadow: 6,
           },
         }}
@@ -60,8 +61,7 @@ export const ProjectCard = ({
           <Typography variant="body2">🍴 Forks: {project.forks}</Typography>
           <Typography variant="body2">🐛 Issues: {project.issues}</Typography>
           <Typography variant="body2">
-            🕒 Created:{" "}
-            {new Date(Number(project.createdAt)).toLocaleDateString("en-GB")}
+            🕒 Created: {new Date(Number(project.createdAt)).toLocaleDateString('en-GB')}
           </Typography>
         </Stack>
 

@@ -1,13 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { UsersService } from './providers/users.service';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ActiveUser } from 'src/auth/decorator/active-user.decorator';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+
 import { PublicUserDto } from './dto/get-user.dto';
+import { UsersService } from './providers/users.service';
 
 @ApiTags('Users')
 @ApiBearerAuth()

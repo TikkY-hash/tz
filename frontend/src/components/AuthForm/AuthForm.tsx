@@ -1,6 +1,8 @@
-import { LoginDto } from "@/interfaces/auth.interface";
-import { Box, TextField, Button, Alert } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Alert, Box, Button, TextField } from '@mui/material';
+import { useForm } from 'react-hook-form';
+
+import { LoginDto } from '@/interfaces/auth.interface';
+import { getErrorMessage } from './helpers';
 
 interface AuthFormProps {
   isLogin: boolean;
@@ -9,12 +11,7 @@ interface AuthFormProps {
   error: unknown;
 }
 
-export const AuthForm = ({
-  isLogin,
-  onSubmit,
-  isLoading,
-  error,
-}: AuthFormProps) => {
+export const AuthForm = ({ isLogin, onSubmit, isLoading, error }: AuthFormProps) => {
   const {
     register,
     handleSubmit,
@@ -27,11 +24,11 @@ export const AuthForm = ({
         <TextField
           label="Email"
           type="email"
-          {...register("email", {
-            required: "Email is required",
+          {...register('email', {
+            required: 'Email is required',
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "Invalid email format",
+              message: 'Invalid email format',
             },
           })}
           error={!!errors.email}
@@ -42,15 +39,15 @@ export const AuthForm = ({
         <TextField
           label="Password"
           type="password"
-          {...register("password", {
-            required: "Password is required",
+          {...register('password', {
+            required: 'Password is required',
             ...(isLogin
               ? {}
               : {
                   pattern: {
                     value:
                       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|\\:;"'<>,.?/]).*$/,
-                    message: "Must include upper/lowercase, number, and symbol",
+                    message: 'Must include upper/lowercase, number, and symbol',
                   },
                 }),
           })}
@@ -59,34 +56,18 @@ export const AuthForm = ({
           fullWidth
         />
 
-        {error && (
-          <Alert severity="error">
-            {(() => {
-              const err = error as {
-                response?: { data?: { message?: string } };
-              };
-              return (
-                err?.response?.data?.message ||
-                (isLogin ? "Login failed" : "Registration failed")
-              );
-            })()}
-          </Alert>
-        )}
+        <Alert severity="error">
+          {getErrorMessage(error, isLogin) as unknown as React.ReactNode}
+        </Alert>
 
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          disabled={isLoading}
-          sx={{ mt: 2 }}
-        >
+        <Button type="submit" variant="contained" fullWidth disabled={isLoading} sx={{ mt: 2 }}>
           {isLoading
             ? isLogin
-              ? "Logging in..."
-              : "Registering..."
+              ? 'Logging in...'
+              : 'Registering...'
             : isLogin
-            ? "Login"
-            : "Register"}
+            ? 'Login'
+            : 'Register'}
         </Button>
       </Box>
     </form>

@@ -1,13 +1,13 @@
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
   Box,
-} from "@mui/material";
-import { useMemo } from "react";
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
+import { useMemo } from 'react';
 
 interface CreateProjectDialogProps {
   open: boolean;
@@ -40,16 +40,10 @@ export const CreateProjectDialog = ({
             fullWidth
             label="GitHub repo path (e.g. facebook/react)"
             value={repo}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
             disabled={isLoading}
             error={!isValidRepo && repo.length > 0}
-            helperText={
-              !isValidRepo && repo.length > 0
-                ? "Format must be like: owner/repo"
-                : " "
-            }
+            helperText={!isValidRepo && repo.length > 0 ? 'Format must be like: owner/repo' : ' '}
           />
         </Box>
       </DialogContent>
@@ -57,12 +51,8 @@ export const CreateProjectDialog = ({
         <Button onClick={onClose} disabled={isLoading}>
           Cancel
         </Button>
-        <Button
-          onClick={onSubmit}
-          variant="contained"
-          disabled={isLoading || !isValidRepo}
-        >
-          {isLoading ? "Adding..." : "Add"}
+        <Button onClick={onSubmit} variant="contained" disabled={isLoading || !isValidRepo}>
+          {isLoading ? 'Adding...' : 'Add'}
         </Button>
       </DialogActions>
     </Dialog>

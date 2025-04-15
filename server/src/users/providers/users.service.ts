@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from '../dto/create-user.dto';
-
-import { CreateUserProvider } from './create-user.provider';
-import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
+import { Repository } from 'typeorm';
+
+import { CreateUserDto } from '../dto/create-user.dto';
 import { PublicUserDto } from '../dto/get-user.dto';
+import { User } from '../entities/user.entity';
+import { CreateUserProvider } from './create-user.provider';
 
 @Injectable()
 export class UsersService {

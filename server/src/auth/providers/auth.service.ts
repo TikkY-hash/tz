@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { SignInDto } from '../dto/signin.dto';
-import { SingInProvider } from './sign-in.provider';
+
 import { RefreshTokenDto } from '../dto/refresh-token.dto';
+import { SignInDto } from '../dto/signin.dto';
 import { RefreshTokenProvider } from './refresh-token.provider';
+import { SingInProvider } from './sign-in.provider';
 
 @Injectable()
 export class AuthService {

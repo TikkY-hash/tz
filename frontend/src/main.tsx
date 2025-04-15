@@ -1,10 +1,11 @@
-import ReactDOM from "react-dom/client";
-import { RouterProvider } from "@tanstack/react-router";
-import { AppProviders } from "./providers";
-import { router } from "./router/router";
+import { RouterProvider } from '@tanstack/react-router';
+import ReactDOM from 'react-dom/client';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+import { AppProviders } from './providers';
+import { router } from './router/router';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <AppProviders>
     <RouterProvider router={router} />
-  </AppProviders>
+  </AppProviders>,
 );

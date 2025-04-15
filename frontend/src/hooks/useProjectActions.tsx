@@ -1,7 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProject, deleteProject, refreshProject } from "@/api/projects";
-import { CreateProjectDto, Project } from "@/interfaces/project.interface";
-import { AlertService } from "@/components/AlertService";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { createProject, deleteProject, refreshProject } from '@/api/projects';
+import { AlertService } from '@/components/AlertService';
+import { CreateProjectDto, Project } from '@/interfaces/project.interface';
 
 interface UseProjectActionsOptions {
   onAfterCreate?: () => void;
@@ -15,12 +16,12 @@ export const useProjectActions = (options?: UseProjectActionsOptions) => {
   const createMutation = useMutation<Project, Error, CreateProjectDto>({
     mutationFn: createProject,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       options?.onAfterCreate?.();
-      AlertService.success("Project created successfully!");
+      AlertService.success('Project created successfully!');
     },
-    onError: (error) => {
-      AlertService.error("Failed to create project.");
+    onError: error => {
+      AlertService.error('Failed to create project.');
       options?.onCreateError?.(error);
     },
   });
@@ -28,25 +29,25 @@ export const useProjectActions = (options?: UseProjectActionsOptions) => {
   const deleteMutation = useMutation({
     mutationFn: deleteProject,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
-      AlertService.success("Project deleted successfully!");
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      AlertService.success('Project deleted successfully!');
     },
     onError: () => {
-      AlertService.error("Failed to delete project.");
+      AlertService.error('Failed to delete project.');
     },
   });
 
   const refreshMutation = useMutation({
     mutationFn: refreshProject,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
-      AlertService.success("Project updated successfully!");
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      AlertService.success('Project updated successfully!');
     },
     onSettled: (_data, _error, id: number) => {
       options?.onAfterRefresh?.(id);
     },
     onError: () => {
-      AlertService.error("Failed to update project.");
+      AlertService.error('Failed to update project.');
     },
   });
 

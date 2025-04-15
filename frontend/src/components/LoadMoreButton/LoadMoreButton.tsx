@@ -1,4 +1,4 @@
-import { Box, Button, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
 
 interface LoadMoreButtonProps {
   hasNextPage: boolean;
@@ -12,7 +12,7 @@ export const LoadMoreButton = ({
   onClick,
 }: LoadMoreButtonProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   if (!hasNextPage) return null;
 
@@ -22,9 +22,9 @@ export const LoadMoreButton = ({
         variant="contained"
         onClick={onClick}
         disabled={isFetchingNextPage}
-        sx={{ width: isMobile ? "100%" : "auto" }}
+        sx={{ width: isMobile ? '100%' : 'auto' }}
       >
-        {isFetchingNextPage ? "Loading more..." : "Load More"}
+        {isFetchingNextPage ? 'Loading more...' : 'Load More'}
       </Button>
     </Box>
   );

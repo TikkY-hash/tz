@@ -1,34 +1,29 @@
-import {
-  Box,
-  Button,
-  Stack,
-  useMediaQuery,
-  useTheme,
-  Grid,
-} from "@mui/material";
-import { useState } from "react";
-import { useProjectActions } from "@/hooks/useProjectActions";
-import { useProjectsQuery } from "@/hooks/useProjectsQuery";
-import { ProjectFilters } from "@/components/ProjectFilters";
+import { Box, Button, Grid, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { useState } from 'react';
 
-import { CreateProjectDialog } from "@/components/CreateProjectDialog";
-import { ProjectList } from "@/components/ProjectList";
-import { LoadMoreButton } from "@/components/LoadMoreButton";
+import { CreateProjectDialog } from '@/components/CreateProjectDialog';
+import { LoadMoreButton } from '@/components/LoadMoreButton';
+import { ProjectFilters } from '@/components/ProjectFilters';
+import { ProjectList } from '@/components/ProjectList';
+import { useProjectActions } from '@/hooks/useProjectActions';
+import { useProjectsQuery } from '@/hooks/useProjectsQuery';
 
 export const ProjectsPage = () => {
-  const [search, setSearch] = useState("");
-  const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const [search, setSearch] = useState('');
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [modalOpen, setModalOpen] = useState(false);
-  const [repo, setRepo] = useState("");
+  const [repo, setRepo] = useState('');
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useProjectsQuery(order, search);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useProjectsQuery(
+    order,
+    search,
+  );
   const [refreshingIds, setRefreshingIds] = useState<number[]>([]);
 
-  const projects = data?.pages.flatMap((page) => page.data) || [];
+  const projects = data?.pages.flatMap(page => page.data) || [];
 
   const {
     create,
@@ -39,35 +34,35 @@ export const ProjectsPage = () => {
   } = useProjectActions({
     onAfterCreate: () => {
       setModalOpen(false);
-      setRepo("");
+      setRepo('');
     },
-    onAfterRefresh: (id) => {
-      setRefreshingIds((prev) => prev.filter((i) => i !== id));
+    onAfterRefresh: id => {
+      setRefreshingIds(prev => prev.filter(i => i !== id));
     },
   });
 
   const refresh = (id: number) => {
     if (refreshingIds.includes(id)) return;
 
-    setRefreshingIds((prev) => [...prev, id]);
+    setRefreshingIds(prev => [...prev, id]);
     rawRefresh(id);
   };
 
   return (
     <Box>
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction={{ xs: 'column', sm: 'row' }}
         justifyContent="space-between"
         alignItems="center"
         mb={3}
         sx={{
-          position: isMobile ? "static" : "sticky",
+          position: isMobile ? 'static' : 'sticky',
           top: 0,
           zIndex: 10,
-          backgroundColor: "white",
+          backgroundColor: 'white',
           pb: 2,
           pt: 1,
-          paddingTop: "20px",
+          paddingTop: '20px',
         }}
       >
         <ProjectFilters
@@ -79,7 +74,7 @@ export const ProjectsPage = () => {
         <Button
           variant="contained"
           onClick={() => setModalOpen(true)}
-          sx={{ width: isMobile ? "100%" : "auto" }}
+          sx={{ width: isMobile ? '100%' : 'auto' }}
         >
           Add Project
         </Button>
@@ -90,8 +85,8 @@ export const ProjectsPage = () => {
         spacing={6.3}
         columns={{ xs: 12, sm: 12, md: 12 }}
         justifyContent={{
-          xs: "center",
-          sm: !projects.length ? "center" : "flex-start",
+          xs: 'center',
+          sm: !projects.length ? 'center' : 'flex-start',
         }}
       >
         <ProjectList

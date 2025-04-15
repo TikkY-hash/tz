@@ -1,3 +1,3 @@
-export * from "./AuthPage";
-export * from "./ProjectsPage";
-export * from "./RoutPage";
+export * from './AuthPage';
+export * from './ProjectsPage';
+export * from './RoutPage';

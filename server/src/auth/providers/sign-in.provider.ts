@@ -5,10 +5,11 @@ import {
   RequestTimeoutException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { GenerateTokenProvider } from './generate-token.provider';
-import { BcryptProvider } from './bcrypt.provider';
 import { FindUserByEmailProvider } from 'src/users/providers/find-user-by-email.provider';
+
 import { SignInDto } from '../dto/signin.dto';
+import { BcryptProvider } from './bcrypt.provider';
+import { GenerateTokenProvider } from './generate-token.provider';
 
 @Injectable()
 export class SingInProvider {
@@ -22,13 +23,9 @@ export class SingInProvider {
   ) {}
 
   public async signIn(signInDto: SignInDto) {
-    const user = await this.findUserByEmailProvider.findUserByEmail(
-      signInDto.email,
-    );
+    const user = await this.findUserByEmailProvider.findUserByEmail(signInDto.email);
 
-    const invalidCredentialsError = new UnauthorizedException(
-      'Invalid email or password',
-    );
+    const invalidCredentialsError = new UnauthorizedException('Invalid email or password');
 
     if (!user) {
       throw invalidCredentialsError;
@@ -37,10 +34,7 @@ export class SingInProvider {
     let isEqual = false;
 
     try {
-      isEqual = await this.bcryptProvider.comparePassword(
-        signInDto.password,
-        user.password,
-      );
+      isEqual = await this.bcryptProvider.comparePassword(signInDto.password, user.password);
     } catch {
       throw new RequestTimeoutException('Something went wrong');
     }

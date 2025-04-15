@@ -1,1 +1,1 @@
-export * from "./AlertService";
+export * from './AlertService';

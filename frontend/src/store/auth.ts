@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface AuthState {
   accessToken: string | null;
@@ -9,20 +9,20 @@ interface AuthState {
   setIsRefreshing: (value: boolean) => void;
 }
 
-export const useAuth = create<AuthState>((set) => ({
-  accessToken: localStorage.getItem("accessToken"),
-  refreshToken: localStorage.getItem("refreshToken"),
+export const useAuth = create<AuthState>(set => ({
+  accessToken: localStorage.getItem('accessToken'),
+  refreshToken: localStorage.getItem('refreshToken'),
   isRefreshing: false,
 
   setTokens: ({ accessToken, refreshToken }) => {
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
     set({ accessToken, refreshToken });
   },
 
   clearTokens: () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     set({ accessToken: null, refreshToken: null });
   },
 

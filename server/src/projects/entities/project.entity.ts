@@ -1,12 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  Index,
-} from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index(['repoPath', 'userId'], { unique: true })
 @Entity()

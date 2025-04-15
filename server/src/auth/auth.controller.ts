@@ -1,12 +1,13 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/providers/users.service';
-import { SignInDto } from './dto/signin.dto';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { AuthService } from './providers/auth.service';
+
 import { Auth } from './decorator/auth.decorator';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { SignInDto } from './dto/signin.dto';
 import { AuthType } from './enums/auth-type.enum';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { AuthService } from './providers/auth.service';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -21,8 +22,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({
     status: 201,
-    description:
-      'User registered successfully. Returns access and refresh tokens',
+    description: 'User registered successfully. Returns access and refresh tokens',
     schema: {
       example: {
         accessToken: 'eyJhbGciOiJIUzI1NiIsInR...',

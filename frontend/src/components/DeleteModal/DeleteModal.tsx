@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 interface DeleteModalProps {
   open: boolean;
@@ -31,12 +25,7 @@ export const DeleteModal = ({
         <Button onClick={onClose} disabled={isLoading}>
           Cancel
         </Button>
-        <Button
-          onClick={onConfirm}
-          color="error"
-          variant="contained"
-          disabled={isLoading}
-        >
+        <Button onClick={onConfirm} color="error" variant="contained" disabled={isLoading}>
           Delete
         </Button>
       </DialogActions>

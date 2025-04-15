@@ -1,7 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,15 +16,10 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('GitHub Projects CRM API')
-    .setDescription(
-      'API for managing public GitHub repositories via user-created projects',
-    )
+    .setDescription('API for managing public GitHub repositories via user-created projects')
     .setVersion('1.0.0')
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
-    .addServer(
-      `http://localhost:${process.env.NEST_PORT}`,
-      'Local development server',
-    )
+    .addServer(`http://localhost:${process.env.NEST_PORT}`, 'Local development server')
     .addBearerAuth(
       {
         type: 'http',

@@ -1,12 +1,13 @@
-import axios from "axios";
-import { useAuth } from "@/store/auth";
+import axios from 'axios';
+
+import { useAuth } from '@/store/auth';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(config => {
   const token = useAuth.getState().accessToken;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -15,14 +16,14 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use(
-  (res) => res,
-  async (error) => {
+  res => res,
+  async error => {
     const originalRequest = error.config;
 
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/auth/refresh")
+      !originalRequest.url.includes('/auth/refresh')
     ) {
       originalRequest._retry = true;
 
@@ -38,7 +39,7 @@ api.interceptors.response.use(
           return Promise.reject(error);
         }
 
-        const response = await api.post("/auth/refresh", { refreshToken });
+        const response = await api.post('/auth/refresh', { refreshToken });
 
         const { accessToken, refreshToken: newRefresh } = response.data;
 
@@ -55,7 +56,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

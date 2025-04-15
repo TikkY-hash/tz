@@ -21,7 +21,7 @@ export interface GetProjectsResponse {
 }
 
 export interface GetProjectsParams {
-  order?: "asc" | "desc";
+  order?: 'asc' | 'desc';
   search?: string;
   page?: number;
   limit?: number;

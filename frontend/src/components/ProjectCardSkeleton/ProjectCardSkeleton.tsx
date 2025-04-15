@@ -1,4 +1,4 @@
-import { Paper, Skeleton, Stack } from "@mui/material";
+import { Paper, Skeleton, Stack } from '@mui/material';
 
 export const ProjectCardSkeleton = () => {
   return (
@@ -7,10 +7,10 @@ export const ProjectCardSkeleton = () => {
       sx={{
         p: 3,
         borderRadius: 3,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        minWidth: "250px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minWidth: '250px',
       }}
     >
       <Stack spacing={1}>
@@ -25,18 +25,8 @@ export const ProjectCardSkeleton = () => {
       <Stack spacing={1} sx={{ mt: 3 }}>
         <Skeleton animation="wave" variant="rounded" height={36} width="100%" />
         <Stack direction="row" spacing={1}>
-          <Skeleton
-            animation="wave"
-            variant="rounded"
-            height={36}
-            width="100%"
-          />
-          <Skeleton
-            animation="wave"
-            variant="rounded"
-            height={36}
-            width="100%"
-          />
+          <Skeleton animation="wave" variant="rounded" height={36} width="100%" />
+          <Skeleton animation="wave" variant="rounded" height={36} width="100%" />
         </Stack>
       </Stack>
     </Paper>
