@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: github-crm-api
+    build: ./server
+    restart: unless-stopped
+    ports:
+      - '${NEST_PORT:-3000}:3000'
+    env_file:
+      - ./server/.env
+    depends_on:
+      - db
+
+  db:
+    container_name: github-crm-db
+    image: postgres:15
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    env_file:
+      - ./server/.env  
+    environment:
+      POSTGRES_USER: ${USERNAME}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DATABASE}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  frontend:
+    container_name: github-crm-client
+    build: ./frontend
+    working_dir: /app
+    ports:
+      - '${VITE_PORT:-5173}:5173'
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
