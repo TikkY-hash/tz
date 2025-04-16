@@ -18,6 +18,8 @@ export const AuthForm = ({ isLogin, onSubmit, isLoading, error }: AuthFormProps)
     formState: { errors },
   } = useForm<LoginDto>();
 
+  const errorMessage = getErrorMessage(error, isLogin);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Box display="flex" flexDirection="column" gap={2}>
@@ -56,9 +58,7 @@ export const AuthForm = ({ isLogin, onSubmit, isLoading, error }: AuthFormProps)
           fullWidth
         />
 
-        <Alert severity="error">
-          {getErrorMessage(error, isLogin) as unknown as React.ReactNode}
-        </Alert>
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
         <Button type="submit" variant="contained" fullWidth disabled={isLoading} sx={{ mt: 2 }}>
           {isLoading
