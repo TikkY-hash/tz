@@ -12,8 +12,8 @@
 ### 1. Клонування проєкту
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/TikkY-hash/tz.git
+cd tz
 ```
 
 ### 2. Налаштування `.env` для бекенду
